@@ -1,0 +1,17 @@
+{
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "printWidth": 80,
+    "overrides": [
+        {
+            "files": ["*.vue", "*.js", "*.html", "*.css", "*.json"],
+            "options": {
+                "semi": false,
+                "singleQuote": true,
+                "tabWidth": 2,
+                "printWidth": 80
+            }
+        }
+    ]
+}

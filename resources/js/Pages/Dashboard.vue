@@ -1,22 +1,26 @@
-<script setup>
-import AppLayout from '@/Layouts/AppLayout.vue';
-import Welcome from '@/Components/Welcome.vue';
+<script lang="ts" setup>
+import { ref } from 'vue'
+import AppLayout from '@/Layouts/AppLayout.vue'
+import TodaysDateBar from '@/Components/TodaysDateBar.vue'
+import NewTask from '@/Components/NewTask.vue'
+import TaskList from '@/Components/TaskList.vue'
+import NewProject from '@/Components/NewProject.vue'
+
+const hide1 = ref<boolean>(false)
+const hide2 = ref<boolean>(false)
 </script>
 
 <template>
-    <AppLayout title="Dashboard">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Dashboard
-            </h2>
-        </template>
+  <AppLayout title="Tasks">
+    <div class="flex justify-center items-center min-h-screen bg-[#cbd7e3]">
+      <div class="h-auto w-96 bg-white rounded-lg p-4">
+        <TodaysDateBar />
+        <p class="text-xl font-semibold mt-2 text-[#063c76]">To-do List</p>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <Welcome />
-                </div>
-            </div>
-        </div>
-    </AppLayout>
+        <NewProject v-if="!hide2" @close="hide1 = false" @open="hide1 = true" />
+        <NewTask v-if="!hide1" @close="hide2 = false" @open="hide2 = true" />
+        <TaskList v-if="!hide1 && !hide2" />
+      </div>
+    </div>
+  </AppLayout>
 </template>

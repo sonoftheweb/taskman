@@ -5,6 +5,12 @@ import TodaysDateBar from '@/Components/TodaysDateBar.vue'
 import NewTask from '@/Components/NewTask.vue'
 import TaskList from '@/Components/TaskList.vue'
 import NewProject from '@/Components/NewProject.vue'
+import { Task, type Project } from '@/definitions/types'
+
+const props = defineProps<{
+  projects: Array<Project>
+  tasks: Array<Task>
+}>()
 
 const hide1 = ref<boolean>(false)
 const hide2 = ref<boolean>(false)
@@ -18,7 +24,12 @@ const hide2 = ref<boolean>(false)
         <p class="text-xl font-semibold mt-2 text-[#063c76]">To-do List</p>
 
         <NewProject v-if="!hide2" @close="hide1 = false" @open="hide1 = true" />
-        <NewTask v-if="!hide1" @close="hide2 = false" @open="hide2 = true" />
+        <NewTask
+          v-if="!hide1"
+          :projects="props.projects"
+          @close="hide2 = false"
+          @open="hide2 = true"
+        />
         <TaskList v-if="!hide1 && !hide2" />
       </div>
     </div>

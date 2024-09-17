@@ -14,20 +14,18 @@ import {
 const showForm = ref<boolean>(false)
 const query = ref<string>('')
 
+const props = defineProps<{ projects: Project[] }>()
+const projects = props.projects
+
 const form = useForm({
   id: 0,
   title: '',
   description: '',
   dateCreated: new Date(),
-  dateToBeCompleted: new Date(),
+  dateToBeCompleted: new Date().toISOString(),
   dateCompleted: undefined,
   project: null,
 })
-
-const projects: Project[] = [
-  { id: 1, title: 'Home' },
-  { id: 2, title: 'School' },
-]
 
 const filteredProject = computed(() =>
   query.value === ''
@@ -163,7 +161,7 @@ const submit = () => {
             >Date to be Completed</label
           >
           <input
-            type="date"
+            type="datetime-local"
             id="dateToBeCompleted"
             v-model="form.dateToBeCompleted"
             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50"

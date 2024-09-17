@@ -17,6 +17,7 @@ class ProjectController extends Controller
         DB::transaction(function () use ($validated) {
             $project = new Project();
             $project->title = $validated['title'];
+            $project->author_id = auth()->id(); // Assuming the author is the currently authenticated user
             $project->save();
         });
 
